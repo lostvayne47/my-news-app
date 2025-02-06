@@ -14,11 +14,7 @@ export default class News extends Component {
   }
 
   async getData() {
-    let URL = `${this.props.baseURL}
-    ?q=${this.props.query}
-    &apiKey=${this.props.API_KEY}
-    &page=${this.state.page}
-    &pageSize=${this.props.pageSize}`;
+    let URL = `${this.props.baseURL}?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.API_KEY}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
 
     try {
       const response = await fetch(URL);
@@ -47,11 +43,11 @@ export default class News extends Component {
       loading: true,
     });
     console.log("Next");
-    let URL = `${this.props.baseURL}
-    ?q=${this.props.query}
-    &apiKey=${this.props.API_KEY}
-    &page=${this.state.page + 1}
-    &pageSize=${this.props.pageSize}`;
+    let URL = `${this.props.baseURL}?country=${this.props.country}&category=${
+      this.props.category
+    }&apiKey=${this.props.API_KEY}&page=${this.state.page + 1}&pageSize=${
+      this.props.pageSize
+    }`;
 
     try {
       const response = await fetch(URL);
@@ -80,11 +76,11 @@ export default class News extends Component {
       loading: true,
     });
     console.log("Previous");
-    let URL = `${this.props.baseURL}
-    ?q=${this.props.query}
-    &apiKey=${this.props.API_KEY}
-    &page=${this.state.page - 1}
-    &pageSize=${this.props.pageSize}`;
+    let URL = `${this.props.baseURL}?country=${this.props.country}&category=${
+      this.props.category
+    }&apiKey=${this.props.API_KEY}&page=${this.state.page - 1}&pageSize=${
+      this.props.pageSize
+    }`;
 
     try {
       const response = await fetch(URL);
@@ -172,6 +168,7 @@ export default class News extends Component {
 News.defaultProps = {
   pageSize: 10,
   API_KEY: "d45adaf1be234f9a9576726aa10f2f4e",
-  query: "india",
-  baseURL: "https://newsapi.org/v2/everything",
+  country: "us",
+  baseURL: "https://newsapi.org/v2/top-headlines",
+  category: "general",
 };
