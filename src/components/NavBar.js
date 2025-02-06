@@ -4,7 +4,7 @@ export default class NavBar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className=" navbar navbar-dark navbar-expand-lg  bg-dark">
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
               Quick Shorts

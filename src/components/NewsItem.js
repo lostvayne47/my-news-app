@@ -4,8 +4,8 @@ export default class NewsItem extends Component {
   render() {
     let { cardTitle, cardText, imgURL, newsURL } = this.props;
     return (
-      <div>
-        <div className="card" style={{ width: "18rem", height: "30rem" }}>
+      <div className="container">
+        <div className="card mx-5" style={{ width: "18rem", height: "30rem" }}>
           <img
             src={imgURL ? imgURL : "https://dummyimage.com/400x200"}
             className="card-img-top"
@@ -21,15 +21,16 @@ export default class NewsItem extends Component {
             </h5>
             <p
               className="card-text"
-              style={{ overflow: "hidden", height: "12rem" }}
+              style={{
+                overflow: "hidden",
+                height: "12rem",
+                textAlign: "justify",
+                fontSize: "15px",
+              }}
             >
               {cardText}
             </p>
-            <a
-              href={newsURL}
-              target="_blank "
-              className="btn btn-sm btn-primary"
-            >
+            <a href={newsURL} target="_blank " className="btn btn-sm btn-dark">
               Go to Article
             </a>
           </div>
