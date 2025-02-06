@@ -31,7 +31,7 @@ export default class NewsItem extends Component {
               {cardText}
             </p>
             <a href={newsURL} target="_blank " className="btn btn-sm btn-dark">
-              Go to Article
+              Go to Article 🔗
             </a>
           </div>
         </div>
