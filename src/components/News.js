@@ -112,7 +112,7 @@ export default class News extends Component {
         ) : (
           <div className="container my-5">
             <h2 className="text-center">Top 20 Headlines</h2>
-            <div className="row row-cols-3 row-cols-md-3 g-4 my-5">
+            <div className="row row-cols-3 row-cols-md-3 g-4 my-5 wrap">
               {this.state.articles?.map((a) => {
                 if (a) {
                   return (

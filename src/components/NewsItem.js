@@ -5,12 +5,12 @@ export default class NewsItem extends Component {
     let { cardTitle, cardText, imgURL, newsURL } = this.props;
     return (
       <div className="container">
-        <div className="card mx-5" style={{ width: "18rem", height: "30rem" }}>
+        <div className="card" style={{ minWidth: "10rem", height: "30rem" }}>
           <img
             src={imgURL ? imgURL : "https://dummyimage.com/400x200"}
             className="card-img-top"
             alt="..."
-            style={{ width: "100%", height: "25%" }}
+            style={{ width: "100%", height: "40%" }}
           />
           <div className="card-body">
             <h5
@@ -23,7 +23,7 @@ export default class NewsItem extends Component {
               className="card-text"
               style={{
                 overflow: "hidden",
-                height: "12rem",
+                height: "7rem",
                 textAlign: "justify",
                 fontSize: "15px",
               }}
