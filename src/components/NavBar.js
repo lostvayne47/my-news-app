@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default class NavBar extends Component {
   render() {
     return (
-      <div>
+      <div style={{ margin: "30px", padding: "10px" }}>
         <nav className=" navbar navbar-dark navbar-expand-lg  bg-dark fixed-top">
           <div className="container-fluid">
             <Link

@@ -15,16 +15,18 @@ export default class News extends Component {
   }
 
   async getData() {
+    this.props.setProgress(0);
     let URL = `${this.props.baseURL}?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.API_KEY}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
 
     try {
       const response = await fetch(URL);
-
+      this.props.setProgress(25);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       const data = await response.json();
+      this.props.setProgress(50);
 
       // Ensure articles is an array before updating state
       this.setState({
@@ -32,6 +34,7 @@ export default class News extends Component {
         loading: false,
         totalResults: data.totalResults,
       });
+      this.props.setProgress(100);
     } catch (error) {
       console.error("Error fetching data:", error);
       this.setState({ articles: [], loading: false }); // Set empty array in case of failure
@@ -60,7 +63,7 @@ export default class News extends Component {
             endMessage={"Thats all folks stay tuned!"}
           >
             <div className="container">
-              <div className="row row-cols-3 row-cols-md-3 g-4 my-5 wrap">
+              <div className="row row-cols-1 row-cols-md-3 g-4 m-5">
                 {this.state.articles?.map((a) => {
                   if (a) {
                     return (
@@ -91,7 +94,7 @@ export default class News extends Component {
 //Only 100 components are limited in single api according to NEWS API
 News.defaultProps = {
   pageSize: 10,
-  API_KEY: "d45adaf1be234f9a9576726aa10f2f4e",
+  API_KEY: "API KEY",
   country: "us",
   baseURL: "https://newsapi.org/v2/top-headlines",
   category: "general",
