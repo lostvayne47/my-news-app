@@ -40,68 +40,20 @@ export default class News extends Component {
   handleNext = async () => {
     this.setState({
       ...this.state,
+      page: this.state.page + 1,
       loading: true,
     });
-    console.log("Next");
-    let URL = `${this.props.baseURL}?country=${this.props.country}&category=${
-      this.props.category
-    }&apiKey=${this.props.API_KEY}&page=${this.state.page + 1}&pageSize=${
-      this.props.pageSize
-    }`;
 
-    try {
-      const response = await fetch(URL);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      // Ensure articles is an array before updating state
-      this.setState({
-        articles: Array.isArray(data.articles) ? data.articles : [],
-        loading: false,
-        totalResults: data.totalResults,
-        page: this.state.page + 1,
-      });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      this.setState({ articles: [], loading: false }); // Set empty array in case of failure
-    }
+    this.getData();
   };
   handlePrevious = async () => {
     this.setState({
       ...this.state,
+      page: this.state.page - 1,
       loading: true,
     });
-    console.log("Previous");
-    let URL = `${this.props.baseURL}?country=${this.props.country}&category=${
-      this.props.category
-    }&apiKey=${this.props.API_KEY}&page=${this.state.page - 1}&pageSize=${
-      this.props.pageSize
-    }`;
 
-    try {
-      const response = await fetch(URL);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      // Ensure articles is an array before updating state
-      this.setState({
-        articles: Array.isArray(data.articles) ? data.articles : [],
-        loading: false,
-        totalResults: data.totalResults,
-        page: this.state.page - 1,
-      });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      this.setState({ articles: [], loading: false }); // Set empty array in case of failure
-    }
+    this.getData();
   };
 
   render() {
