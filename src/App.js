@@ -5,6 +5,7 @@ import News from "./components/News";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export default class App extends Component {
+  pageSize = 10;
   render() {
     return (
       <div>
@@ -17,7 +18,7 @@ export default class App extends Component {
               element={
                 <News
                   key="/"
-                  pageSize={20}
+                  pageSize={this.pageSize}
                   category={"general"}
                   country={"us"}
                 />
@@ -29,7 +30,7 @@ export default class App extends Component {
               element={
                 <News
                   key="/"
-                  pageSize={20}
+                  pageSize={this.pageSize}
                   category={"general"}
                   country={"us"}
                 />
@@ -41,7 +42,7 @@ export default class App extends Component {
               element={
                 <News
                   key="business"
-                  pageSize={20}
+                  pageSize={this.pageSize}
                   category={"business"}
                   country={"us"}
                 />
@@ -53,7 +54,7 @@ export default class App extends Component {
               element={
                 <News
                   key="sports"
-                  pageSize={20}
+                  pageSize={this.pageSize}
                   category={"sports"}
                   country={"us"}
                 />
@@ -65,7 +66,7 @@ export default class App extends Component {
               element={
                 <News
                   key="science"
-                  pageSize={20}
+                  pageSize={this.pageSize}
                   category={"science"}
                   country={"us"}
                 />
@@ -77,7 +78,7 @@ export default class App extends Component {
               element={
                 <News
                   key="health"
-                  pageSize={20}
+                  pageSize={this.pageSize}
                   category={"health"}
                   country={"us"}
                 />
@@ -88,7 +89,11 @@ export default class App extends Component {
               path="/technology"
               key="technology"
               element={
-                <News pageSize={20} category={"technology"} country={"us"} />
+                <News
+                  pageSize={this.pageSize}
+                  category={"technology"}
+                  country={"us"}
+                />
               }
             ></Route>
             <Route
@@ -97,7 +102,7 @@ export default class App extends Component {
               element={
                 <News
                   key="entertainment"
-                  pageSize={20}
+                  pageSize={this.pageSize}
                   category={"entertainment"}
                   country={"us"}
                 />

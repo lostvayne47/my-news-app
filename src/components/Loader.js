@@ -4,8 +4,8 @@ export default class Loader extends Component {
   loaderStyle = {
     backgroundColor: "#fafafa",
     opacity: "25%",
-    height: "100vh",
-    width: "100vw",
+    width: "100%",
+    height: "100px",
   };
   render() {
     return (
@@ -15,7 +15,7 @@ export default class Loader extends Component {
       >
         <div
           className="spinner-border"
-          style={{ width: "5rem", height: "5rem" }}
+          style={{ width: "3rem", height: "3rem", margin: "10px" }}
           role="status"
         >
           <span className="sr-only"></span>

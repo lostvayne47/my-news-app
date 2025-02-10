@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Loader from "./Loader";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default class News extends Component {
   constructor() {
@@ -27,7 +28,7 @@ export default class News extends Component {
 
       // Ensure articles is an array before updating state
       this.setState({
-        articles: Array.isArray(data.articles) ? data.articles : [],
+        articles: this.state.articles.concat(data.articles),
         loading: false,
         totalResults: data.totalResults,
       });
@@ -37,7 +38,7 @@ export default class News extends Component {
     }
   }
 
-  handleNext = async () => {
+  fetchMore = async () => {
     this.setState({
       ...this.state,
       page: this.state.page + 1,
@@ -46,72 +47,66 @@ export default class News extends Component {
 
     this.getData();
   };
-  handlePrevious = async () => {
-    this.setState({
-      ...this.state,
-      page: this.state.page - 1,
-      loading: true,
-    });
-
-    this.getData();
-  };
-
   render() {
     return (
       <div>
-        {this.state.loading ? (
-          <Loader></Loader>
-        ) : (
-          <div className="container my-5">
-            <h2 className="text-center">Top 20 Headlines</h2>
-            <div className="row row-cols-3 row-cols-md-3 g-4 my-5 wrap">
-              {this.state.articles?.map((a) => {
-                if (a) {
-                  return (
-                    <div
-                      key={a.source.id + a.author + a.publishedAt}
-                      className="col"
-                    >
-                      <NewsItem
-                        cardTitle={a.title}
-                        cardText={a.description}
-                        imgURL={a.urlToImage}
-                        newsURL={a.url}
-                      />
-                    </div>
-                  );
-                }
-                return null;
-              })}
+        <h2 className="text-center">Top 20 Headlines</h2>
+        <div>
+          <InfiniteScroll
+            dataLength={this.state.articles.length}
+            next={this.fetchMore}
+            hasMore={this.state.articles.length !== this.state.totalResults}
+            loader={<Loader />}
+            endMessage={"Thats all folks stay tuned!"}
+          >
+            <div className="container">
+              <div className="row row-cols-3 row-cols-md-3 g-4 my-5 wrap">
+                {this.state.articles?.map((a) => {
+                  if (a) {
+                    return (
+                      <div
+                        key={a.source.id + a.author + a.publishedAt}
+                        className="col"
+                      >
+                        <NewsItem
+                          cardTitle={a.title}
+                          cardText={a.description}
+                          imgURL={a.urlToImage}
+                          newsURL={a.url}
+                        />
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
             </div>
-            <div className="container d-flex justify-content-between">
-              <button
-                disabled={this.state.loading || this.state.page <= 1}
-                type="button"
-                className="btn btn-dark"
-                onClick={this.handlePrevious}
-              >
-                &larr; Previous
-              </button>
-              <button
-                disabled={
-                  this.state.loading ||
-                  this.state.page + 1 >
-                    (this.state.totalResults > 100
-                      ? 100 / this.props.pageSize
-                      : Math.ceil(
-                          this.state.totalResults / this.props.pageSize
-                        ))
-                }
-                type="button"
-                className="btn btn-dark"
-                onClick={this.handleNext}
-              >
-                Next &rarr;
-              </button>
-            </div>
-          </div>
-        )}
+          </InfiniteScroll>
+        </div>
+        <div className="container d-flex justify-content-between">
+          <button
+            disabled={this.state.loading || this.state.page <= 1}
+            type="button"
+            className="btn btn-dark"
+            onClick={this.handlePrevious}
+          >
+            &larr; Previous
+          </button>
+          <button
+            disabled={
+              this.state.loading ||
+              this.state.page + 1 >
+                (this.state.totalResults > 100
+                  ? 100 / this.props.pageSize
+                  : Math.ceil(this.state.totalResults / this.props.pageSize))
+            }
+            type="button"
+            className="btn btn-dark"
+            onClick={this.handleNext}
+          >
+            Next &rarr;
+          </button>
+        </div>
       </div>
     );
   }
