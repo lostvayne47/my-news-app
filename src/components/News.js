@@ -83,35 +83,12 @@ export default class News extends Component {
             </div>
           </InfiniteScroll>
         </div>
-        <div className="container d-flex justify-content-between">
-          <button
-            disabled={this.state.loading || this.state.page <= 1}
-            type="button"
-            className="btn btn-dark"
-            onClick={this.handlePrevious}
-          >
-            &larr; Previous
-          </button>
-          <button
-            disabled={
-              this.state.loading ||
-              this.state.page + 1 >
-                (this.state.totalResults > 100
-                  ? 100 / this.props.pageSize
-                  : Math.ceil(this.state.totalResults / this.props.pageSize))
-            }
-            type="button"
-            className="btn btn-dark"
-            onClick={this.handleNext}
-          >
-            Next &rarr;
-          </button>
-        </div>
       </div>
     );
   }
 }
 
+//Only 100 components are limited in single api according to NEWS API
 News.defaultProps = {
   pageSize: 10,
   API_KEY: "d45adaf1be234f9a9576726aa10f2f4e",
