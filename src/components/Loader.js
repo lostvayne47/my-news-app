@@ -1,26 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class Loader extends Component {
-  loaderStyle = {
+export default function Loader() {
+  const loaderStyle = {
     backgroundColor: "#fafafa",
     opacity: "25%",
     width: "100%",
     height: "100px",
   };
-  render() {
-    return (
+  return (
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={loaderStyle}
+    >
       <div
-        className="d-flex justify-content-center align-items-center"
-        style={this.loaderStyle}
+        className="spinner-border"
+        style={{ width: "3rem", height: "3rem", margin: "10px" }}
+        role="status"
       >
-        <div
-          className="spinner-border"
-          style={{ width: "3rem", height: "3rem", margin: "10px" }}
-          role="status"
-        >
-          <span className="sr-only"></span>
-        </div>
+        <span className="sr-only"></span>
       </div>
-    );
-  }
+    </div>
+  );
 }
