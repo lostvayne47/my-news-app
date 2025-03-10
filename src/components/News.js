@@ -48,7 +48,9 @@ export default function News({
     getData();
   }
 
-  useEffect(getData(), []); // Call the function correctly
+  useEffect(() => {
+    getData();
+  }, []); // Call the function correctly
 
   return (
     <div>
