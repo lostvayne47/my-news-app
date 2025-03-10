@@ -50,6 +50,7 @@ export default function News({
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line
   }, []); // Call the function correctly
 
   return (
